@@ -1,0 +1,16 @@
+{
+  "name": "f-cloud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "David Ramirez Ledesma <davo.rmz@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.978.0",
+    "uuid": "^8.3.2"
+  }
+}
