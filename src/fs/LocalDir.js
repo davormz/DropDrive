@@ -6,15 +6,21 @@ async function openLocalDir(dirName){
 
 async function readLocalDir(dirName){
     console.log('Reading local directory ...')
-    return await openLocalDir(dirName);
+    // return await openLocalDir(dirName);
+    return await fs.readdir(dirName);
 }
 
 async function createDir(dirName){
     return await fs.mkdir(dirName);
 }
 
+function readFile(file){
+    return fs.readFile(file);
+}
+
 module.exports = {
     createDir,
     openLocalDir,
-    readLocalDir
+    readLocalDir,
+    readFile
 }
