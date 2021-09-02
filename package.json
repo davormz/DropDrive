@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "env-cmd -f .env npx tsc ./src/index.ts"
+    "build": "npx tsc",
+    "start": "env-cmd -f .env node ./dist"
   },
   "keywords": [],
   "author": "David Ramirez Ledesma <davo.rmz@gmail.com>",
