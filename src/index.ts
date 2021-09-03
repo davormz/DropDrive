@@ -1,6 +1,6 @@
 import LocalDir from './fs/LocalDir';
 import S3Client from './fs/s3';
-import ProcessQueue from './ProcessQueue';
+import ProcessQueue from './processor/ProcessQueue';
 
 function main(){
     
