@@ -1,5 +1,6 @@
 node_modules/
 .idea/
 main-dir/
+main_working_dir/
 dist/
 .env

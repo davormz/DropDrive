@@ -11,7 +11,7 @@ class LocalDir{
     
     async readLocalDir(dirName: string): Promise<string[]>{
         console.log('Reading local directory ...')
-        return await readdir(dirName);
+        return await readdir(dirName);       
     }
     
     async createDir(dirName: string): Promise<void>{

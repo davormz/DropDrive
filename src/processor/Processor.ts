@@ -7,3 +7,5 @@ interface Processor{
     processQueue():void;
 
 }
+
+export default Processor;
