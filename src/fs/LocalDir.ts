@@ -1,5 +1,6 @@
-import { Dir } from 'fs';
-import { opendir, readdir, mkdir, readFile } from 'fs/promises';
+import { Dir, Stats, statSync } from 'fs';
+import { opendir, readdir, mkdir, readFile, stat } from 'fs/promises';
+// import 
 
 class LocalDir{
     
@@ -20,6 +21,11 @@ class LocalDir{
     
     readFile(file: string): Promise<Buffer>{
         return readFile(file);
+    }
+
+    isFile(path: string): boolean{
+        let statResponse:Stats = statSync(path); 
+        return statResponse.isFile();
     }
 }
 export default LocalDir;

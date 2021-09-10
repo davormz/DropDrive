@@ -5,11 +5,17 @@ import LocalDir from './../fs/LocalDir';
 import S3Client from './../fs/s3';
 
 class DesktopProcessor implements Processor{
+    private localFs: LocalDir;
+    private s3Client: S3Client;
+
+    constructor(){
+        this.localFs = new LocalDir();
+        this.s3Client = new S3Client();
+    }
 
     initQueue(): void {
         const mainDirName = process.env.DROP_DRIVE_MAIN_FOLDER as string;
         const args = process.argv.splice(2);
-        let loaded: boolean = false;
 
         if(mainDirName){
             ProcessQueue.getInstance().pushDirectory(mainDirName);
@@ -23,45 +29,56 @@ class DesktopProcessor implements Processor{
 
     processQueue(): void {
         this.initQueue();
-        let localFs = new LocalDir();
-        let s3Client = new S3Client();
 
         while( !ProcessQueue.getInstance().isEmpty()){
-            let dirName = ProcessQueue.getInstance().popDirectory() as string;
+            let path = ProcessQueue.getInstance().popDirectory() as string;
 
-            //TODO: Validate if it is a file or a directory.
-
-            localFs.readLocalDir(dirName)
-            .then(files => {
-                console.log('Directory has been read', files);
-        
-                for (const file of files) {
-                    localFs.readFile(`${dirName}/${file}`)
-                    .then((buffer) => {
-                        s3Client.uploadObject(file, buffer);
-                    })
-                    .catch((err) => console.error('Error uploading to s3: ', err));            
-                }
-            })
-            .catch(err => {
-                if(err.code === 'ENOENT'){
-                    console.log(`Directory: ${dirName} does not exist. Creating directory ...`);
-                    localFs.createDir(dirName)
-                    .then(() => {
-                        console.log('Directory has been created!');
-                        //TODO: implement a callback ?
-                        //If it doesn't exist what it is going to precess?
-                        // main();
-                    })
-                    .catch(err => console.error('An Error has occured! ', err));
-                } else {
-                    console.error('An Error has occured! ', err);
-                }
-            })
-            .finally(() => {
-                console.log('Process ended successfully!');
-            });    
+            if(this.localFs.isFile(path)){
+               this.processFile(path);
+            } else {
+                this.processFolder(path);
+            }                
         }
+    }
+
+    createDir(dirName: string) {
+        this.localFs.createDir(dirName)
+        .then(() => {
+            console.log('Directory has been created!');
+            //TODO: implement a callback ?
+            //If it doesn't exist what it is going to process?
+            // This call will be usefull for a main folder instalation.
+            // main();
+        })
+        .catch(err => console.error('An Error has occured! ', err));
+    }
+
+    processFile(path: string){
+        this.localFs.readFile(path)
+        .then((buffer) => {
+            this.s3Client.uploadObject(path, buffer);
+        })
+        .catch((err) => console.error('Error uploading to s3: ', err));
+    }
+
+    processFolder(dirName: string) {
+        this.localFs.readLocalDir(dirName)
+        .then(files => {
+            console.log(`Starting process for folder ${dirName} ...`);    
+            for (const file of files) {
+                this.processFile(`${dirName}/${file}`);          
+            }
+        })
+        .catch(err => {
+            if(err.code === 'ENOENT'){
+                console.log(`Directory: ${dirName} does not exist.`);                    
+            } else {
+                console.error('An Error has occured! ', err);
+            }
+        })
+        .finally(() => {
+            console.log(`Process for folder ${dirName} ended!`);
+        });
     }
 }
 
