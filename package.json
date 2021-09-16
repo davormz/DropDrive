@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "dev": "npx tsc --watch",
+    "build-watch": "npx tsc --watch",
     "build-start": "npm run build && env-cmd -f .env node ./dist",
-    "start": "env-cmd -f .env node ./dist"
+    "start-deamon": "env-cmd -f .env node ./dist",
+    "start-cli": "env-cmd -f .env node ./dist main_working_dir"
   },
   "keywords": [],
   "author": "David Ramirez Ledesma <davo.rmz@gmail.com>",

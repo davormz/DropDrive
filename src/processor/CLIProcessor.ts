@@ -1,10 +1,10 @@
 import Processor from './Processor';
 import ProcessQueue from './ProcessQueue';
 
-import LocalDir from './../fs/LocalDir';
-import S3Client from './../fs/s3';
+import LocalDir from '../fs/LocalDir';
+import S3Client from '../fs/s3';
 
-class DesktopProcessor implements Processor{
+class CliProcessor implements Processor{
     private localFs: LocalDir;
     private s3Client: S3Client;
 
@@ -14,12 +14,14 @@ class DesktopProcessor implements Processor{
     }
 
     initQueue(): void {
-        const mainDirName = process.env.DROP_DRIVE_MAIN_FOLDER as string;
+        //TODO: Move this to another processor, like the Deamon processor.
+        // const mainDirName = process.env.DROP_DRIVE_MAIN_FOLDER as string;
+        // if(mainDirName){
+        //     ProcessQueue.getInstance().pushDirectory(mainDirName);
+        // }
+        
         const args = process.argv.splice(2);
 
-        if(mainDirName){
-            ProcessQueue.getInstance().pushDirectory(mainDirName);
-        }
         if(args.length > 0){
             args.forEach(element => {
                 ProcessQueue.getInstance().pushDirectory(element);
@@ -66,7 +68,12 @@ class DesktopProcessor implements Processor{
         .then(files => {
             console.log(`Starting process for folder ${dirName} ...`);    
             for (const file of files) {
-                this.processFile(`${dirName}/${file}`);          
+                let path: string = `${dirName}/${file}`;
+                if(this.localFs.isFile(path)){
+                    this.processFile(path);
+                } else {
+                    ProcessQueue.getInstance().pushDirectory(path);
+                }
             }
         })
         .catch(err => {
@@ -82,4 +89,4 @@ class DesktopProcessor implements Processor{
     }
 }
 
-export default DesktopProcessor
+export default CliProcessor

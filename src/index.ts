@@ -1,9 +1,9 @@
-import DesktopProcessor from './processor/DesktopProcessor';
+import CliProcessor from './processor/CLIProcessor';
 
 function main(){
     
-    const desktopProcessor = new DesktopProcessor();
-    desktopProcessor.processQueue();
+    const cliProcessor = new CliProcessor();
+    cliProcessor.processQueue();
 }
 
 //Main entry point
