@@ -1,8 +1,9 @@
 {
   "name": "drop-drive",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "DropDrive is a tool to drop files in your personal cloud",
+  "main": "src/index.ts",
+  "bin": "src/indev.ts",
   "scripts": {
     "build": "npx tsc",
     "build-watch": "npx tsc --watch",
@@ -10,7 +11,7 @@
     "start-deamon": "env-cmd -f .env node ./dist",
     "start-cli": "env-cmd -f .env node ./dist main_working_dir"
   },
-  "keywords": [],
+  "keywords": ["S3", "aws", "cloud"],
   "author": "David Ramirez Ledesma <davo.rmz@gmail.com>",
   "license": "ISC",
   "dependencies": {
@@ -21,5 +22,13 @@
   "devDependencies": {
     "@types/node": "^16.7.10",
     "typescript": "^4.4.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davormz/DropDrive.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davormz/DropDrive/issues"
+  },
+  "homepage": "https://github.com/davormz/DropDrive#readme"
 }

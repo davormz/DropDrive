@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import CliProcessor from './processor/CLIProcessor';
 
 function main(){
