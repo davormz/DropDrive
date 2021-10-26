@@ -1,13 +1,15 @@
 # My Drop-Drive Project.
 ## Goal
-The Main goal of this project is to replicate the basic features of DropBox using Node.js and AWS.
+The Main goal of this project is to have a tool that helps to add or drop files into my personal cloud, using Node.js and AWS.
 
-As a basic featue i mean to have a program that uploads or backs up my files to the cloud.
+## Features - backlog.
++ Define a CLI client which will receive a list of files or folder to upload to the specified cloud - v.1.0.0.
++ Define a work space or main folder, which will could be specified in properties. Daemon client - _future feature_.
++ GUI - _future feature_.
 
-## Features.
-* Select a main folder to back-up all the files in that folder.
-* Define a work or main folder can be specified in properties - future.
-* The program should be able to receive parameters from the console and upload the specified directory or file.
+### CLI Specification.
+The cli client uses [yargs](https://www.npmjs.com/package/yargs) to handle the arguments.
+
 
 ## Project Setup.
 ### Pre requisites.
