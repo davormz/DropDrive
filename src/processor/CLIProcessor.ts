@@ -7,10 +7,12 @@ import S3Client from '../fs/s3';
 class CliProcessor implements Processor{
     private localFs: LocalDir;
     private s3Client: S3Client;
+    private argv: (string | number)[];
 
-    constructor(){
+    constructor(argv: (string | number)[]){
         this.localFs = new LocalDir();
         this.s3Client = new S3Client();
+        this.argv = argv;
     }
 
     initQueue(): void {
@@ -20,11 +22,9 @@ class CliProcessor implements Processor{
         //     ProcessQueue.getInstance().pushDirectory(mainDirName);
         // }
         
-        const args = process.argv.splice(2);
-
-        if(args.length > 0){
-            args.forEach(element => {
-                ProcessQueue.getInstance().pushDirectory(element);
+        if(this.argv.length > 0){
+            this.argv.forEach(element => {
+                ProcessQueue.getInstance().pushDirectory(element as string);
             })
         }
     }
@@ -73,7 +73,7 @@ class CliProcessor implements Processor{
                     this.processFile(path);
                 } else {
                     ProcessQueue.getInstance().pushDirectory(path);
-                }
+                }                
             }
         })
         .catch(err => {

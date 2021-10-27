@@ -2,9 +2,9 @@
   "name": "drop-drive",
   "version": "1.0.0",
   "description": "DropDrive is a tool to drop files in your personal cloud",
-  "main": "bin/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "dropd": "./bin/index.js"
+    "dropd": "./dist/index.js"
   },
   "scripts": {
     "build": "npx tsc",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^16.7.10",
+    "@types/yargs": "^17.0.4",
     "typescript": "^4.4.2"
   },
   "repository": {
