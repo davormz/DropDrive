@@ -9,6 +9,12 @@ config.update({
 });
 
 class S3Client{
+  constructor(){
+    console.log(`S3 client: 
+    Region: ${process.env.AWS_S3_BUCKET_REGION}
+    Bucket: ${process.env.AWS_S3_BUCKET_NAME}
+    `)
+  }
 
   uploadObject(fileName: string, file: any){
     const s3 = new S3();
