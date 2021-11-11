@@ -1,6 +1,6 @@
 import { Dir, Stats, statSync } from 'fs';
 import { opendir, readdir, mkdir, readFile, stat } from 'fs/promises';
-// import 
+import Logger from './../logger/Logger';
 
 class LocalDir{
     
@@ -11,7 +11,7 @@ class LocalDir{
     }
     
     async readLocalDir(dirName: string): Promise<string[]>{
-        console.log('Reading local directory ...')
+        Logger.info('Reading local directory ...')
         return await readdir(dirName);       
     }
     

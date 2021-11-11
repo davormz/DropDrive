@@ -15,5 +15,13 @@ function main(){
     cliProcessor.processQueue();
 }
 
+process.on('unhandledRejection', error => {
+    //TODO
+});
+   
+process.on('uncaughtException', error => {
+    //TODO
+})
+
 //Main entry point
 main();
