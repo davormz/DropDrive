@@ -2,7 +2,6 @@
   "name": "drop-drive",
   "version": "1.0.0",
   "description": "DropDrive is a tool to drop files in your personal cloud",
-  "type": "module",
   "main": "dist/index.js",
   "bin": {
     "dropd": "./dist/index.js"
@@ -32,7 +31,7 @@
   "devDependencies": {
     "@types/node": "^16.7.10",
     "@types/yargs": "^17.0.4",
-    "mocha": "^9.1.3",
+    "mocha": "^10.0.0",
     "typescript": "^4.4.2"
   },
   "repository": {

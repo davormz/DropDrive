@@ -4,7 +4,7 @@
 Drop-Drive is a tool to backup your files in your personal cloud.
 
 ## Project Goal
-The Main goal of this project is to have a tool that helps to add or drop files into your personal cloud and practice some Node.js and AWS concepts.
+The Project's goal is to have a tool that helps to add or drop files into your personal cloud and have full control of your file backup storage.
 
 ## Features - backlog.
 + Define a CLI client which will receive a list of files or folder to upload to the specified cloud - v.1.0.0.
@@ -34,11 +34,11 @@ Create the _.env_ file based on the _.env_example_ file and add the proper value
 
 ### AWS configuration.
 
-#### Bucket cofiguration.
-In your AWS account, create a S3 bucket with the same name and same region as defined in the _.env_ file.
+#### Bucket configuration.
+In your AWS account, create a S3 bucket with the same name and same region as defined in the `.env` file.
 
 #### Security configuration.
 Following the least privilege strategy. Create a user and assign a permissions policy with just access to S3.
 
-Generate the access key and secret key and aad them to the _.env_ file.
+Generate the access key and secret key and aad them to the `.env` file (_temporally_).
 
